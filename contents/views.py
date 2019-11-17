@@ -2,7 +2,7 @@ from django.http import HttpResponseForbidden, HttpResponse
 from django.shortcuts import render
 import os, sys, requests, csv
 from django.http import HttpResponseForbidden, HttpResponse
-
+import pathlib
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import (
     MessageEvent, TextMessage, FollowEvent, UnfollowEvent,
@@ -11,7 +11,9 @@ from linebot.models import (
 
 from linebot import LineBotApi, WebhookHandler
 from django.views.decorators.csrf import csrf_exempt
-
+from dotenv import load_dotenv
+current_dir22 = pathlib.Path(__file__).parents[1].joinpath('config', '.env')
+load_dotenv(str(current_dir22))
 
 
 line_channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
