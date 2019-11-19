@@ -78,7 +78,7 @@ def handle_follow(event):
     profile = line_bot_api.get_profile(event.source.user_id)
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=profile)
+        TextSendMessage(text=profile.user_id)
     )
 #
 #
