@@ -75,9 +75,10 @@ def callback(request):
 # フォローイベントの場合の処理
 @handler.add(FollowEvent)
 def handle_follow(event):
+    profile = line_bot_api.get_profile(event.source.user_id)
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text='初めまして')
+        TextSendMessage(text=profile)
     )
 #
 #

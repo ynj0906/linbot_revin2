@@ -11,12 +11,10 @@ from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import LineBotApiError
 from dotenv import load_dotenv
 
-from contents.management.commands import usersDB
-
 
 class Command(BaseCommand):
     
-    
+
     def tweetinfo(self):
         url = "https://twitter.com/rev84"
         ua = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) ' \
