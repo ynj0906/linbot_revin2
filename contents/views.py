@@ -9,11 +9,17 @@ from linebot.models import (
     TextSendMessage, ImageMessage, AudioMessage
 )
 
+
+
+from .management.commands import xyz
+
 from linebot import LineBotApi, WebhookHandler
 from django.views.decorators.csrf import csrf_exempt
 from dotenv import load_dotenv
 current_dir22 = pathlib.Path(__file__).parents[1].joinpath('config', '.env')
 load_dotenv(str(current_dir22))
+
+
 
 
 line_channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
@@ -22,11 +28,12 @@ channel_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
 line_bot_api = LineBotApi(channel_access_token)
 handler = WebhookHandler(line_channel_secret)
 
-
 # Create your views here.
 
 # 確認用view
 def index(request):
+    pro=20
+    print(xyz.Gsheet_save(pro))
     return HttpResponse(123)
 
 
@@ -48,16 +55,7 @@ def index(request):
 #     template_message = TemplateSendMessage(alt_text='友達追加ありがとう！\nまず、あなたの性別を教えてください。', template=buttons_template)
 #     line_bot_api.reply_message(event.reply_token, template_message)
 #
-# @handler.add(UnfollowEvent)
-# def handle_unfollow(event):
-#     """
-#     ブロックされた時のイベント。
-#     UsersDBのIDと性別、アクティビティを削除。
-#     ＜TODO＞　QuestionDBの投稿を削除。
-#     """
-#     UserID = event.source.user_id
-#     users_DB.remove(UserID)
-#
+
 
 @csrf_exempt
 def callback(request):
@@ -76,12 +74,23 @@ def callback(request):
 @handler.add(FollowEvent)
 def handle_follow(event):
     profile = line_bot_api.get_profile(event.source.user_id)
+    print(xyz.Gsheet_save(profile))
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=profile.user_id)
     )
-#
-#
+    
+    
+# @handler.add(UnfollowEvent)
+# def handle_unfollow(event):
+#     """
+#     ブロックされた時のイベント。
+#     UsersDBのIDと性別、アクティビティを削除。
+#     ＜TODO＞　QuestionDBの投稿を削除。
+#     """
+#     UserID = event.source.user_id
+#     users_DB.remove(UserID)
+
 # メッセージイベントの場合の処理
 @handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):

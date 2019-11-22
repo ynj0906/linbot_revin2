@@ -9,11 +9,12 @@ from linebot.models import MessageEvent, TextMessage, FollowEvent, UnfollowEvent
     AudioMessage
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import LineBotApiError
+import gspread
 from dotenv import load_dotenv
-
+from . import xyz
 
 class Command(BaseCommand):
-    
+    print(xyz.Gsheet_base())
 
     def tweetinfo(self):
         url = "https://twitter.com/rev84"
@@ -73,12 +74,11 @@ class Command(BaseCommand):
         current_dir11 = pathlib.Path(__file__).parents[3].joinpath('config', '.env')
         load_dotenv(str(current_dir11))
         channel_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
-        
-        
-
+ 
         if self.tweetinfo():
             line_bot_api = LineBotApi(channel_access_token)
-            try:
-                line_bot_api.push_message("Uc148172028f01d4635bdb232e6b00920", TextSendMessage(text="はじまったで！"))
-            except LineBotApiError as e:
-                return e
+            for i in xyz.Gsheet_base().worksheet.col_values(2):
+                try:
+                    line_bot_api.push_message(i, TextSendMessage(text="はじまったで！"))
+                except LineBotApiError as e:
+                    return e
