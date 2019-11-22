@@ -32,8 +32,8 @@ handler = WebhookHandler(line_channel_secret)
 
 # 確認用view
 def index(request):
-    pro=20
-    print(xyz.Gsheet_save(pro))
+    pro="U4af4980629"
+    print(xyz.Gsheet_save([pro]))
     return HttpResponse(123)
 
 
@@ -74,7 +74,7 @@ def callback(request):
 @handler.add(FollowEvent)
 def handle_follow(event):
     profile = line_bot_api.get_profile(event.source.user_id)
-    print(xyz.Gsheet_save(profile))
+    print(xyz.Gsheet_save([profile]))
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=profile.user_id)

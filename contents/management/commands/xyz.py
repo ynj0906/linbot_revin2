@@ -36,7 +36,7 @@ def Gsheet_base():
     #     cell1+=1
 def Gsheet_save(profile):
     # 取得した情報を対象の列に順番に入力保存
-    for i in range(profile):
+    for i in profile:
         # worksheet.append_row(i)"""うまく動かん"""
         xx = Gsheet_base().col_values(2)
         Gsheet_base().update_cell(len(xx) + 1, 2, i)
