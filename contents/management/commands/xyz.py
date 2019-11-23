@@ -39,4 +39,4 @@ def Gsheet_save(profile):
     for i in profile:
         # worksheet.append_row(i)"""うまく動かん"""
         xx = Gsheet_base().col_values(2)
-        Gsheet_base().update_cell(len(xx) + 1, 2, i)
+        Gsheet_base().update_cell(len(xx) + 1, 2, str(i))
