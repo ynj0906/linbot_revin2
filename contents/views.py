@@ -33,8 +33,8 @@ handler = WebhookHandler(line_channel_secret)
 
 # 確認用view
 def index(request):
-    pro="U4af4980629"
-    print(xyz.Gsheet_save([pro]))
+    # pro="U4af4980629"
+    # print(xyz.Gsheet_save([pro]))
     return HttpResponse(123)
 
 
