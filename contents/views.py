@@ -75,7 +75,7 @@ def callback(request):
 @handler.add(FollowEvent)
 def handle_follow(event):
     profile = line_bot_api.get_profile(event.source.user_id)
-    print(xyz.Gsheet_save([profile]))
+    print(xyz.Gsheet_save([profile.user_id]))
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=profile.user_id)
