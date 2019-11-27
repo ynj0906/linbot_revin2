@@ -14,7 +14,6 @@ from dotenv import load_dotenv
 from . import xyz
 
 class Command(BaseCommand):
-    print(xyz.Gsheet_base())
 
     def tweetinfo(self):
         url = "https://twitter.com/rev84"
@@ -77,8 +76,8 @@ class Command(BaseCommand):
  
         if self.tweetinfo():
             line_bot_api = LineBotApi(channel_access_token)
-            for i in xyz.Gsheet_base().worksheet.col_values(2):
+            for i in xyz.Gsheet_base().col_values(2):
                 try:
-                    line_bot_api.push_message(i, TextSendMessage(text="はじまったで！"))
+                    line_bot_api.push_message(str(i), TextSendMessage(text="はじまったで！"))
                 except LineBotApiError as e:
                     return e
