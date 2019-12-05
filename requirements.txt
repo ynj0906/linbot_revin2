@@ -1,7 +1,7 @@
 beautifulsoup4==4.8.1
 certifi==2019.9.11
 chardet==3.0.4
-Django==2.2.7
+Django==2.2.8
 future==0.18.2
 gspread==3.1.0
 httplib2==0.14.0
